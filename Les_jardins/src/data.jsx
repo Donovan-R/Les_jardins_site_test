@@ -5,49 +5,49 @@ export const links = [
   {
     id: 1,
     url: "/",
-    text: "random",
+    text: "Accueil",
   },
   {
     id: 2,
     url: "/about",
-    text: "about",
+    text: "À propos",
   },
   {
     id: 3,
-    url: "/projects",
-    text: "projects",
+    url: "/plantation",
+    text: "Plantation",
   },
   {
     id: 4,
-    url: "/contact",
-    text: "contact",
+    url: "/ressources",
+    text: "ressources diverses",
   },
   {
     id: 5,
-    url: "/profile",
-    text: "profile",
+    url: "/contact",
+    text: "Nous rejoindre",
   },
 ];
 
-export const social = [
-  {
-    id: 1,
-    url: "https://www.twitter.com",
-    icon: <FaFacebook />,
-  },
-  {
-    id: 2,
-    url: "https://www.twitter.com",
-    icon: <FaTwitter />,
-  },
-  {
-    id: 3,
-    url: "https://www.twitter.com",
-    icon: <FaLinkedin />,
-  },
-  {
-    id: 4,
-    url: "https://www.twitter.com",
-    icon: <FaBehance />,
-  },
-];
+// export const social = [
+//   {
+//     id: 1,
+//     url: "https://www.twitter.com",
+//     icon: <FaFacebook />,
+//   },
+//   {
+//     id: 2,
+//     url: "https://www.twitter.com",
+//     icon: <FaTwitter />,
+//   },
+//   {
+//     id: 3,
+//     url: "https://www.twitter.com",
+//     icon: <FaLinkedin />,
+//   },
+//   {
+//     id: 4,
+//     url: "https://www.twitter.com",
+//     icon: <FaBehance />,
+//   },
+// ];

@@ -1,10 +1,76 @@
 import React from "react";
+import potager1 from ".././assets/potager1.jpg";
+import potager2 from ".././assets/potager2.jpg";
+import potager3 from ".././assets/potager3.jpg";
+// import Slider from "../components/slider";
+// import { SimpleSlider } from "../components/SimpleSlider";
 
 const Home = () => {
   return (
     <section className="section">
-      <h1 style={{ padding: "80px" }}>Les jardins de l'Autour</h1>
       <h2>Accueil</h2>
+      <div>
+        {/* <SimpleSlider /> */}
+        <div id="carouselExampleIndicators" class="carousel slide">
+          <div className="carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="0"
+              className="active"
+              aria-current="true"
+              aria-label="Slide 1"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="2"
+              aria-label="Slide 3"
+            ></button>
+          </div>
+          <div className="carousel-inner">
+            <div className="carousel-item active">
+              <img src={potager1} className="d-block" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src={potager2} className="d-block" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src={potager3} className="d-block" alt="..." />
+            </div>
+          </div>
+          <button
+            className="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev"
+          >
+            <span
+              className="carousel-control-prev-icon"
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button
+            className="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next"
+          >
+            <span
+              className="carousel-control-next-icon"
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
       <p>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iste
         consequuntur officia earum laborum accusamus dolor animi deleniti nulla
@@ -94,6 +160,9 @@ const Home = () => {
         commodi. Dolorem consequatur expedita nostrum, voluptatem nisi eveniet
         optio fugiat voluptatibus pariatur a obcaecati?
       </p>
+      <a className="goUp" href="#">
+        retour
+      </a>
     </section>
   );
 };

@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { social, links } from "./data";
+import { links } from "../data";
 import { FaBars } from "react-icons/fa";
-import logo from "./assets/logo/logo.png";
+import logo from ".././assets/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const contRef = useRef(null);
   const linksRef = useRef(null);
-  console.log(isOpen);
 
   useEffect(() => {
     const linksHeight = linksRef.current.getBoundingClientRect().height;
@@ -41,7 +40,7 @@ const Navbar = () => {
               })}
             </ul>
           </div>
-          <ul className="social-icons">
+          {/* <ul className="social-icons">
             {social.map((soc) => {
               const { id, url, icon } = soc;
               return (
@@ -50,7 +49,7 @@ const Navbar = () => {
                 </li>
               );
             })}
-          </ul>
+          </ul> */}
         </div>
       </nav>
     </>

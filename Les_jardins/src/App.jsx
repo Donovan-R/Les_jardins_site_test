@@ -1,26 +1,27 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import "bootstrap/dist/js/bootstrap.bundle.min";
 
-import NavShared from "./NavShared";
-import Home from "./Accueil";
-import A_propos from "./a_propos";
+import NavShared from "./pages/NavShared";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Plantation from "./pages/Plantation";
+import Ressources from "./pages/Ressources";
 
 const App = () => {
   return (
-    <>
-      <Router>
-        <div>
-          <Routes>
-            <Route to="/" element={<NavShared />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<A_propos />} />
-            </Route>
-          </Routes>
-        </div>
-      </Router>
-    </>
+    <Router>
+      <h1>Les jardins de l'Autour</h1>
+      <Routes>
+        <Route path="/" element={<NavShared />}>
+          <Route index element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/plantation" element={<Plantation />}></Route>
+          <Route path="/contact" element={<Contact />}></Route>
+          <Route path="/ressources" element={<Ressources />}></Route>
+        </Route>
+      </Routes>
+    </Router>
   );
 };
 
