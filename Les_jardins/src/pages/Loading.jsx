@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 const Loading = () => {
-  return <div>Chargement en cours</div>;
+  return <h2>Chargement en cours</h2>;
 };
 
 export default Loading;
