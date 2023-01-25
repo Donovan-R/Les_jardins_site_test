@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import reglement from '.././assets/Jardins-reglement-interieur.pdf';
 import Form from '../components/Form';
+import { FaRegPaperPlane } from 'react-icons/fa';
+import { GiBirdHouse } from 'react-icons/gi';
 
 const Contact = () => {
   return (
-    <section className='section'>
+    <section className='section contactSection'>
       <h2>Contact</h2>
       <h4>
         Prêt à cultiver votre jardin? Remplissez le formulaire ci-dessous pour
@@ -13,14 +15,22 @@ const Contact = () => {
         savoir si vous êtes toujours intéressé, le moment venu.
       </h4>
       <p>
-        avant tout, pensez à consulter notre réglement intérieur{' '}
-        <a href={reglement}>ici</a>
+        Avant tout, consultez le rgèlement intérieur de l'association{' '}
+        <a href={reglement}>ici</a> (vous devrez l'accepter pour finaliser votre
+        inscription)
       </p>
-      <Form />
-      <Link to='/'>retour à l'accueil</Link>
+      <div className='formEntire'>
+        <Form />
+      </div>
+
+      <Link to='/'>
+        <span className='backHome'>
+          <GiBirdHouse />
+        </span>
+      </Link>
 
       <a href='#' className='goUp'>
-        haut de page
+        <FaRegPaperPlane />
       </a>
     </section>
   );

@@ -1,11 +1,6 @@
 import React from 'react';
-import potager1 from '.././assets/potager1.jpg';
-import potager2 from '.././assets/potager2.jpg';
-import potager3 from '.././assets/potager3.jpg';
 import { SimpleSlider } from '../components/SimpleSlider';
-
-// import Slider from "../components/slider";
-// import { SimpleSlider } from "../components/SimpleSlider";
+import { FaRegPaperPlane } from 'react-icons/fa';
 
 const Home = () => {
   return (
@@ -41,7 +36,7 @@ const Home = () => {
         </div>
         <div className='backUp'>
           <a className='goUp' href='#'>
-            retour
+            <FaRegPaperPlane />
           </a>
         </div>
       </section>

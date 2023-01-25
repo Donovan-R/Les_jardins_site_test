@@ -1,10 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FaRegPaperPlane } from 'react-icons/fa';
+import { GiBirdHouse } from 'react-icons/gi';
 
 const About = () => {
   return (
     <>
-      <section className="section">
+      <section className='section'>
         <h2>À propos</h2>
         <h3>Les débuts</h3>
         <p>
@@ -17,7 +19,15 @@ const About = () => {
           à l’association par courrier
         </p>
 
-        <Link to="/">retour à l'accueil</Link>
+        <Link to='/'>
+          <span className='backHome'>
+            <GiBirdHouse />
+          </span>
+        </Link>
+
+        <a href='#' className='goUp'>
+          <FaRegPaperPlane />
+        </a>
       </section>
     </>
   );
