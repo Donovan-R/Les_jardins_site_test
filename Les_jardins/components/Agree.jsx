@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
 
-const Agree = () => {
+const Agree = (handleSubmit) => {
   const [agree, setAgree] = useState(false);
 
   const checkboxHandler = () => {
     // if agree === true, it will be set to false
     // if agree === false, it will be set to true
     setAgree(!agree);
-    // Don't miss the exclamation mark
-  };
-
-  // When the button is clicked
-  const btnHandler = () => {
-    alert('votre demande a été prise en compte');
   };
 
   return (
@@ -32,7 +26,7 @@ const Agree = () => {
         </div>
 
         {/* Don't miss the exclamation mark* */}
-        <button disabled={!agree} className='btn' onClick={btnHandler}>
+        <button disabled={!agree} className='btn'>
           S'inscrire
         </button>
       </div>

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { GiBirdHouse } from 'react-icons/gi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import Alert from '../components/Alert';
+import axios from 'axios';
 
-const Login = () => {
+const Login = ({ alert, showAlert, setToken }) => {
+  //* changer password type
   const [passwordType, setPasswordType] = useState('password');
   const togglePassword = () => {
     if (passwordType === 'password') {
@@ -12,6 +15,8 @@ const Login = () => {
     }
     setPasswordType('password');
   };
+
+  //* gérer l'user
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -27,15 +32,33 @@ const Login = () => {
     e.preventDefault();
   };
 
-  const connectClick = (e) => {
+  const navigate = useNavigate();
+
+  const connectUser = async (e) => {
     e.preventDefault();
     console.log(user);
+    try {
+      const { data } = await axios.post(
+        'http://localhost:5000/api/v1/auth/login',
+        user
+      );
+
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', user.email);
+      // localStorage.setItem('username', user.firstname)
+      setToken(data.token);
+      navigate('/todo');
+    } catch (error) {
+      showAlert('invalide', 'danger', true);
+      localStorage.removeItem('token');
+    }
   };
 
   return (
     <>
       <h2>connexion</h2>
       <div className='formEntire'>
+        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
         <h3>Veuillez vous connecter pour accèder à votre espace</h3>
         <div className='formContainer'>
           <form action='' onSubmit={handleSubmit}>
@@ -47,6 +70,7 @@ const Login = () => {
                 name='email'
                 value={user.email}
                 onChange={handleChange}
+                placeholder='exemple@mail.com'
               />
             </div>
             <div className='formRow'>
@@ -59,16 +83,16 @@ const Login = () => {
                 className='formInput'
                 placeholder='mot de passe'
               />
-              <span className='showPassword'>
+              <i className='showPassword'>
                 {passwordType === 'password' ? (
                   <AiFillEye onClick={togglePassword} />
                 ) : (
                   <AiFillEyeInvisible onClick={togglePassword} />
                 )}
-              </span>
+              </i>
             </div>
             <div className='agreeCont'>
-              <button type='submit' onClick={connectClick}>
+              <button type='submit' onClick={connectUser}>
                 Se connecter
               </button>
             </div>

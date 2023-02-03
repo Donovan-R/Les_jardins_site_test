@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaBehance, FaFacebook, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
-export const links = [
+export const linksPublic = [
   {
     id: 1,
     url: '/',
@@ -21,6 +21,7 @@ export const links = [
     id: 4,
     url: '/ressources',
     text: 'ressources',
+    sublinks: [{ id: 1, url: '/resources/articles', text: 'articles' }],
   },
   {
     id: 5,
@@ -33,29 +34,31 @@ export const links = [
     text: 'mon jardin',
   },
 ];
+export const linksPrivate = [
+  {
+    id: 1,
+    url: '/todo',
+    text: 'ma todo',
+  },
+  {
+    id: 2,
+    url: '/plantations',
+    text: 'Plantations',
+  },
+  {
+    id: 3,
+    url: '/ressources',
+    text: 'ressources',
+    sublinks: [{ id: 1, url: '/resources/articles', text: 'articles' }],
+  },
+  {
+    id: 4,
+    url: '/tools',
+    text: 'outilsthèque',
+  },
+];
 
-// export const social = [
-//   {
-//     id: 1,
-//     url: "https://www.twitter.com",
-//     icon: <FaFacebook />,
-//   },
-//   {
-//     id: 2,
-//     url: "https://www.twitter.com",
-//     icon: <FaTwitter />,
-//   },
-//   {
-//     id: 3,
-//     url: "https://www.twitter.com",
-//     icon: <FaLinkedin />,
-//   },
-//   {
-//     id: 4,
-//     url: "https://www.twitter.com",
-//     icon: <FaBehance />,
-//   },
-// ];
+//*ajout social possible
 
 export const vegetables = [
   {

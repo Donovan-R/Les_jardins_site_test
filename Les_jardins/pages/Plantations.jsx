@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaRegPaperPlane } from 'react-icons/fa';
 import { GiArtilleryShell, GiBirdHouse } from 'react-icons/gi';
-import { vegetables } from '../data';
+import { vegetables } from '../src/data';
 
 const Plantation = () => {
   return (

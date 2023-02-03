@@ -5,7 +5,7 @@ import Form from '../components/Form';
 import { FaRegPaperPlane } from 'react-icons/fa';
 import { GiBirdHouse } from 'react-icons/gi';
 
-const Contact = () => {
+const Contact = ({ alert, showAlert, setToken }) => {
   return (
     <section className='section contactSection'>
       <h2>Contact</h2>
@@ -20,7 +20,7 @@ const Contact = () => {
         inscription)
       </p>
       <div className='formEntire'>
-        <Form />
+        <Form alert={alert} showAlert={showAlert} setToken={setToken} />
       </div>
 
       <Link to='/'>
