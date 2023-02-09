@@ -20,7 +20,6 @@ const Navbar = ({ token, setToken }) => {
   }, [isOpen]);
 
   const disconnectUser = () => {
-    console.log(token, 'hi');
     localStorage.removeItem('token');
     setToken('');
   };

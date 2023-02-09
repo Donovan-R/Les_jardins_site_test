@@ -6,13 +6,13 @@ import Home from '../pages/Home';
 import About from '../pages/About';
 import Contact from '../pages/Contact';
 import Plantations from '../pages/Plantations';
-import Ressources from '../pages/Ressources';
-import Login from '../pages/Login';
-import Error from '../pages/Error';
+import SinglePlant from '../pages/SinglePlant';
 import ProtectedRoute from '../pages/ProtectedRoute';
+import Login from '../pages/Login';
 import Tasks from '../pages/Tasks';
 import Tools from '../pages/tools';
-
+import Ressources from '../pages/Ressources';
+import Error from '../pages/Error';
 const getToken = () => {
   return localStorage.getItem('token') ? localStorage.getItem('token') : '';
 };
@@ -43,6 +43,7 @@ const App = () => {
 
           <Route path='/about' element={<About />} />
           <Route path='/plantations' element={<Plantations />}></Route>
+          <Route path='/plantations/:id' element={<SinglePlant />} />
           <Route
             path='/contact'
             element={

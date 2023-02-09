@@ -1,6 +1,3 @@
-import React from 'react';
-import { FaBehance, FaFacebook, FaLinkedin, FaTwitter } from 'react-icons/fa';
-
 export const linksPublic = [
   {
     id: 1,
@@ -54,46 +51,8 @@ export const linksPrivate = [
   {
     id: 4,
     url: '/tools',
-    text: 'outilsthèque',
+    text: 'outilthèque',
   },
 ];
 
 //*ajout social possible
-
-export const vegetables = [
-  {
-    name: 'aubergine',
-    id: 1,
-    img: 'https://images.pexels.com/photos/7195208/pexels-photo-7195208.jpeg?auto=compress&cs=tinysrgb&w=600',
-    plantation: 'fin mars-avril (sous abri), mai(pleine terre)',
-    recolte: 'de mi mai à octobre',
-  },
-  {
-    name: 'tomate',
-    id: 2,
-    img: '',
-    plantation: 'bientôt',
-    recolte: 'bientôt',
-  },
-  {
-    name: 'poivron',
-    id: 3,
-    img: '',
-    plantation: 'bientôt',
-    recolte: 'bientôt',
-  },
-  {
-    name: 'courgette',
-    id: 4,
-    img: '',
-    plantation: 'bientôt',
-    recolte: 'bientôt',
-  },
-  {
-    name: 'cornichon',
-    id: 5,
-    img: '',
-    plantation: 'bientôt',
-    recolte: 'bientôt',
-  },
-];

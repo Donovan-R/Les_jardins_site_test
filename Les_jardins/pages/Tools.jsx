@@ -3,7 +3,7 @@ import React from 'react';
 const Tools = () => {
   return (
     <div>
-      <h2>Outilsthèque</h2>
+      <h2>Outilthèque</h2>
     </div>
   );
 };
