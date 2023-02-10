@@ -5,7 +5,7 @@ import potager3 from '.././assets/potager3.jpg';
 
 export const SimpleSlider = () => {
   return (
-    <div id='carouselExampleIndicators' class='carousel slide'>
+    <div id='carouselExampleIndicators' className='carousel slide'>
       <div className='carousel-indicators'>
         <button
           type='button'

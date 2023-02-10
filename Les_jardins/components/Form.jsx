@@ -11,6 +11,8 @@ const Form = ({ alert, showAlert, setToken }) => {
     mobile: '',
     email: '',
     password: '',
+    justificatif: '',
+    comments: '',
   });
 
   const navigate = useNavigate();
@@ -33,6 +35,33 @@ const Form = ({ alert, showAlert, setToken }) => {
       navigate('/todo');
     } catch (error) {
       showAlert(error.response.data.msg, 'danger', true);
+    }
+  };
+
+  const [selectedFile, setSelectedFile] = useState(null);
+  // const [loaded, setLoaded] = useState(0);
+
+  const handleSelectedFile = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    try {
+      const data = new FormData();
+      data.append('justificatif', selectedFile);
+      await axios
+        .post('../uploads', data)
+        // {
+        //     onUploadProgress: (ProgressEvent) => {
+        //       setLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
+        //     },
+        //   })
+        .then((res) => {
+          console.log(res.statusText);
+        });
+    } catch (error) {
+      console.log(error.response);
     }
   };
 
@@ -98,22 +127,27 @@ const Form = ({ alert, showAlert, setToken }) => {
               onChange={handleChange}
             />
           </div>
-          {/* <div className='formRow'>
-            <label htmlFor='checkedPassword'>
-              vérification du mot de passe
+          <div className='formRow'>
+            <label htmlFor='justificatif'>
+              joindre un justificatif de domicile{' '}
             </label>
             <input
-              type='password'
-              name='checkedPassword'
-              placeholder='saisissez le même mot de passe'
+              type='file'
+              name='justificatif'
+              onChange={handleSelectedFile}
             />
-          </div> */}
+
+            <button onClick={handleUpload}>envoyer mon justificatif</button>
+            {/* <div>{Math.round(loaded, 2)} %</div> */}
+          </div>
           <div className='formRow'>
             <label htmlFor='comment'>commentaires</label>
             <textarea
               type='textarea'
               name='comments'
               placeholder="besoin de nous en dire plus ? c'est ici "
+              value={user.comments}
+              onChange={handleChange}
             />
           </div>
           <Agree />

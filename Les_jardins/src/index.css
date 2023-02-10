@@ -368,7 +368,8 @@ to Do page                 |
 .formCont {
   display: grid;
   text-align: center;
-  background-color: var(--clr-green-bcg);
+  background-color: rgba(37, 105, 47, 0.5);
+
   width: 60%;
   margin: auto;
   border: solid 2px var(--clr-green-light);
@@ -568,6 +569,25 @@ plants              |
   .plantsTab {
     grid-template-columns: repeat(auto-fill, minmax(338.8px, 1fr));
   }
+}
+
+/*
+==================== 
+single plant       |
+====================
+*/
+
+.plantsTitle {
+  display: grid;
+  place-items: center;
+}
+
+.underline {
+  text-align: center;
+  height: 0.75rem;
+  background-color: rgba(29, 112, 41, 0.5);
+  width: 60%;
+  margin: 0.5rem;
 }
 
 /*

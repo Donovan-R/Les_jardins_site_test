@@ -8,11 +8,17 @@ import PlantsList from '../components/PlantsList';
 const Plantations = () => {
   const url = 'http://localhost:5000/api/v1/plants/';
   const [plantationsTab, setPlantationsTab] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const getAllPlants = async () => {
+    if (isLoading) {
+      <div>
+        <h2>chargement en cours</h2>
+      </div>;
+    }
     try {
       const { data } = await axios.get(url);
-
       setPlantationsTab(data.plants);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
