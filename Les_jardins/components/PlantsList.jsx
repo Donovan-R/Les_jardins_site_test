@@ -5,9 +5,9 @@ const PlantsList = ({ plant }) => {
     plant_id,
     name,
     img,
-    plantation_start,
-    plantation_fin,
-    recolte_start,
+    plantation_date_start,
+    plantation_date_end,
+    harvest_date_start,
   } = plant;
   console.log(plant_id);
   return (
@@ -18,12 +18,13 @@ const PlantsList = ({ plant }) => {
       <div className='plant-footer'>
         <h3>{name}</h3>
         <h4>
-          <b>plantation :</b> du {plantation_start} au {plantation_fin}
+          <b>plantation :</b> du {plantation_date_start} au{' '}
+          {plantation_date_end}
         </h4>
         <h4>
-          <b>récolte</b> à partir du : {recolte_start}
+          <b>récolte</b> à partir du : {harvest_date_start}
         </h4>
-        <div>
+        <div className='detailsBtnContainer'>
           <Link to={`/plantations/${plant_id}`} className='detailsBtn'>
             détails
           </Link>

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Alert from './Alert';
-import Agree from './Agree';
 
 const Form = ({ alert, showAlert, setToken }) => {
   const [user, setUser] = useState({
@@ -11,9 +10,10 @@ const Form = ({ alert, showAlert, setToken }) => {
     mobile: '',
     email: '',
     password: '',
-    justificatif: '',
     comments: '',
+    agree: false,
   });
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const navigate = useNavigate();
 
@@ -23,47 +23,42 @@ const Form = ({ alert, showAlert, setToken }) => {
     setUser({ ...user, [name]: value });
   };
 
+  const handleSelectedFile = (e) => {
+    console.log(e.target.files[0]);
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const checkboxHandler = (e) => {
+    setUser({ ...user, agree: e.target.checked });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('justificatif', selectedFile);
+    formData.append('lastname', user.lastname);
+    formData.append('firstname', user.firstname);
+    formData.append('mobile', user.mobile);
+    formData.append('email', user.email);
+    formData.append('password', user.password);
+    formData.append('comments', user.comments);
+    formData.append('agree', user.agree);
+
     try {
       const { data } = await axios.post(
         'http://localhost:5000/api/v1/auth/register',
-        user
+        formData
       );
       localStorage.setItem('token', data.token);
       setToken(data.token);
+
       navigate('/todo');
     } catch (error) {
       showAlert(error.response.data.msg, 'danger', true);
     }
   };
 
-  const [selectedFile, setSelectedFile] = useState(null);
   // const [loaded, setLoaded] = useState(0);
-
-  const handleSelectedFile = (e) => {
-    setSelectedFile(e.target.files[0]);
-  };
-
-  const handleUpload = async (e) => {
-    e.preventDefault();
-    try {
-      const data = new FormData();
-      data.append('justificatif', selectedFile);
-      await axios
-        .post('../uploads', data)
-        // {
-        //     onUploadProgress: (ProgressEvent) => {
-        //       setLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
-        //     },
-        //   })
-        .then((res) => {
-          console.log(res.statusText);
-        });
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
 
   return (
     <>
@@ -127,18 +122,16 @@ const Form = ({ alert, showAlert, setToken }) => {
               onChange={handleChange}
             />
           </div>
-          <div className='formRow'>
+          <div className='formRow justificatifRow'>
             <label htmlFor='justificatif'>
-              joindre un justificatif de domicile{' '}
+              joindre un justificatif de domicile
             </label>
             <input
+              className='justificatifInput'
               type='file'
               name='justificatif'
               onChange={handleSelectedFile}
             />
-
-            <button onClick={handleUpload}>envoyer mon justificatif</button>
-            {/* <div>{Math.round(loaded, 2)} %</div> */}
           </div>
           <div className='formRow'>
             <label htmlFor='comment'>commentaires</label>
@@ -150,7 +143,25 @@ const Form = ({ alert, showAlert, setToken }) => {
               onChange={handleChange}
             />
           </div>
-          <Agree />
+          <div className='agreeBox'>
+            <div className='agreeCont'>
+              <div>
+                <input
+                  type='checkbox'
+                  id='agree'
+                  name='agree'
+                  onChange={checkboxHandler}
+                  value={user.agree}
+                />
+                <label htmlFor='agree'>
+                  En cochant cette case <b> j'accepte </b> le règlement
+                </label>
+              </div>
+              <button disabled={!user.agree} className='btn'>
+                S'inscrire
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     </>

@@ -9,6 +9,9 @@ const Plantations = () => {
   const url = 'http://localhost:5000/api/v1/plants/';
   const [plantationsTab, setPlantationsTab] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [search, setSearch] = useState('');
+  let newTab = [...plantationsTab];
+
   const getAllPlants = async () => {
     if (isLoading) {
       <div>
@@ -17,24 +20,48 @@ const Plantations = () => {
     }
     try {
       const { data } = await axios.get(url);
+      console.log(data);
+
       setPlantationsTab(data.plants);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
     }
   };
-
   useEffect(() => {
     getAllPlants();
   }, []);
 
+  // getFilterPlants = async (e) => {
+  //   const { data } = await axios.get(url);
+  //   setSearch(e.target.value);
+  //   const filterPlants = data.plants.filter((plant) =>
+  //     plant.name.includes(search) ? plant : ''
+  //   );
+  //   setPlantationsTab(filterPlants);
+  // };
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
   return (
     <section className='plantsSection'>
-      <h2>Plantations</h2>
+      <div className='calendarTitle'>
+        <h2>calendrier du potager</h2>
+        <input
+          type='text'
+          placeholder='chercher un plant'
+          value={search}
+          onChange={handleChange}
+        />
+      </div>
       <div className='plantsTab'>
-        {plantationsTab.map((plant) => (
-          <PlantsList plant={plant} key={plant.plant_id} />
-        ))}
+        {newTab
+          .filter((plant) => plant.name.includes(search))
+          .map((plant) => (
+            <PlantsList plant={plant} key={plant.plant_id} />
+          ))}
       </div>
 
       <Link to='/'>

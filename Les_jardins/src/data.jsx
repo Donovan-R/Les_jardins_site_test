@@ -14,19 +14,14 @@ export const linksPublic = [
     url: '/plantations',
     text: 'Plantations',
   },
+
   {
     id: 4,
-    url: '/ressources',
-    text: 'ressources',
-    sublinks: [{ id: 1, url: '/resources/articles', text: 'articles' }],
-  },
-  {
-    id: 5,
     url: '/contact',
     text: 'Nous rejoindre',
   },
   {
-    id: 6,
+    id: 5,
     url: '/login',
     text: 'mon jardin',
   },
@@ -46,7 +41,6 @@ export const linksPrivate = [
     id: 3,
     url: '/ressources',
     text: 'ressources',
-    sublinks: [{ id: 1, url: '/resources/articles', text: 'articles' }],
   },
   {
     id: 4,

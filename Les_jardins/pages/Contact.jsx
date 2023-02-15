@@ -7,7 +7,7 @@ import { GiBirdHouse } from 'react-icons/gi';
 
 const Contact = ({ alert, showAlert, setToken }) => {
   return (
-    <section className='section contactSection'>
+    <section className='contactSection'>
       <h2>Contact</h2>
       <h4>
         Prêt à cultiver votre jardin? Remplissez le formulaire ci-dessous pour
