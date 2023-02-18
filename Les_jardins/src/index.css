@@ -295,8 +295,8 @@ nav {
     margin: 0 0.5rem;
   }
   .links a:hover {
-    padding: 0;
-    background: var(--clr-green-dark);
+    padding-top: 0.5rem;
+    background: transparent;
   }
   /* .social-icons {
     display: flex;
@@ -395,6 +395,18 @@ to Do page                 |
 
 .inputToDo {
   padding: 1rem;
+}
+
+.inputToDo input {
+  background-color: black;
+  color: var(--clr-green-light);
+  border: solid 1px var(--clr-green-light);
+  height: 2rem;
+}
+
+.inputToDo input:focus {
+  background-color: var(--clr-green-light);
+  color: black;
 }
 
 .inputToDo button {
@@ -670,6 +682,30 @@ single plant       |
     height: 400px;
     width: 8px;
   }
+}
+
+/*
+=============
+alert        |
+=============
+*/
+
+.alertSection {
+  position: absolute;
+  width: 100%;
+}
+
+.alert {
+  background-color: rgba(59, 50, 50, 0.9);
+  text-align: center;
+}
+
+.alert-danger {
+  color: red;
+}
+
+.alert-success {
+  color: var(--clr-green-light);
 }
 
 /*

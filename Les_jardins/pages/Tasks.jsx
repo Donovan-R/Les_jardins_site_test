@@ -61,7 +61,7 @@ const Tasks = ({ alert, showAlert }) => {
           name: data.task.name,
         };
         setTasks([...tasks, oneTask]);
-        showAlert('item ajouté', 'success', true);
+        showAlert('tâche ajoutée', 'success', true);
         setTaskAdded('');
       } catch (error) {
         console.log(error);
@@ -89,7 +89,7 @@ const Tasks = ({ alert, showAlert }) => {
         console.log(error);
       }
       setTasks(newTab);
-      showAlert('item modifié', 'success', true);
+      showAlert('tâche modifiée', 'success', true);
       setIsEditing(false);
       setEditId(null);
 
@@ -111,7 +111,7 @@ const Tasks = ({ alert, showAlert }) => {
   const deleteTask = async (id) => {
     try {
       const tasksFiltered = tasks.filter((task) => task.task_id !== id);
-      showAlert('item supprimé', 'danger', true);
+      showAlert('tâche supprimée', 'danger', true);
       setTasks(tasksFiltered);
       await axios.delete(`${url}${id}`, {
         headers: {

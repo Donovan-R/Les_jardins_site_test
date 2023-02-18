@@ -63,8 +63,10 @@ const Form = ({ alert, showAlert, setToken }) => {
   return (
     <>
       <h3>remplissez le formulaire ci-dessous pour vous inscrire :</h3>
-      <div className='formContainer'>
+      <div className='alertSection'>
         {alert.show && <Alert {...alert} removeAlert={showAlert} />}
+      </div>
+      <div className='formContainer'>
         <form action='' onSubmit={handleSubmit}>
           <div className='formRow'>
             <label htmlFor='lastname'>Nom</label>

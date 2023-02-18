@@ -20,8 +20,6 @@ const Plantations = () => {
     }
     try {
       const { data } = await axios.get(url);
-      console.log(data);
-
       setPlantationsTab(data.plants);
       setIsLoading(false);
     } catch (error) {

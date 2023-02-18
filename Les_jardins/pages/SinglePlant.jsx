@@ -5,39 +5,54 @@ import axios from 'axios';
 
 const SinglePlant = () => {
   const [plantDetails, setPlantDetails] = useState([]);
+  const [sowingInside, setSowingInside] = useState([]);
+  const [sowingOutside, setSowingOutside] = useState([]);
   const { id } = useParams();
   const url = 'http://localhost:5000/api/v1/plants/';
 
   const getSinglePlant = async () => {
     try {
       const {
-        data: { plant: plant },
+        data: {
+          plant: plant,
+          sowing_inside: sowing_inside,
+          sowing_outside: sowing_outside,
+        },
       } = await axios.get(`${url}${id}`);
       setPlantDetails(plant);
-      console.log(plantDetails);
+      if (sowing_inside) {
+        setSowingInside(sowing_inside);
+      }
+
+      if (sowing_outside) {
+        setSowingOutside(sowing_outside);
+      }
+      console.log(data);
     } catch (error) {
-      console.log(error.response.data.msg);
+      console.log(error);
     }
   };
 
   useEffect(() => {
     getSinglePlant();
   }, []);
-
   const {
-    name,
+    plant_name,
     img,
-    sowing_date_start,
-    sowing_date_end,
     plantation_date_start,
     plantation_date_end,
     plantation_details,
+    sowing_details,
     crop,
     crop_rotation,
   } = plantDetails;
+
+  const { sowing_date_start_inside, sowing_date_end_inside } = sowingInside;
+  const { sowing_date_start_outside, sowing_date_end_outside } = sowingOutside;
+
   return (
     <>
-      <h2>{name}</h2>
+      <h2>{plant_name}</h2>
       <section
         // style={{
         //   backgroundImage: 'url(' + plantDetails.img + ')',
@@ -49,9 +64,9 @@ const SinglePlant = () => {
       >
         <div className='plantsTitle'>
           <div className='singlePlantPictures'>
-            <img src={img} alt={name} className='singlePlantPicture' />
-            <img src={img} alt={name} className='singlePlantPicture' />
-            <img src={img} alt={name} className='singlePlantPicture' />
+            <img src={img} alt={plant_name} className='singlePlantPicture' />
+            <img src={img} alt={plant_name} className='singlePlantPicture' />
+            <img src={img} alt={plant_name} className='singlePlantPicture' />
           </div>{' '}
         </div>
         <div className='underline'></div>
@@ -59,15 +74,19 @@ const SinglePlant = () => {
         <div className='plantsDetails'>
           <div className='semisDetails'>
             <h3>
-              les semis se font sous abri du {sowing_date_start} au{' '}
-              {sowing_date_end}
-              {/* {semis_terre_start? et en pleine terre du{' '}
-            {plantDetails.semis_terre_start} au {plantDetails.semis_terre_fin}: } */}
+              {sowing_date_start_inside &&
+                `les semis se font sous abri du ${sowing_date_start_inside} au
+                  ${sowing_date_end_inside} `}
+              <br />
+              {sowing_date_start_outside &&
+                `les semis se font en pleine terre du
+              ${sowing_date_start_outside} au ${sowing_date_end_outside}`}
             </h3>
+            <p>{sowing_details}</p>
           </div>
           <div className='plantationDetails'>
             <h3>
-              la plantation se fait du {plantation_date_start} au{' '}
+              la plantation se fait du {plantation_date_start} au
               {plantation_date_end}
             </h3>
             <p>{plantation_details}</p>

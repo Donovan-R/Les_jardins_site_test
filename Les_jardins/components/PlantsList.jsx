@@ -9,7 +9,6 @@ const PlantsList = ({ plant }) => {
     plantation_date_end,
     harvest_date_start,
   } = plant;
-  console.log(plant_id);
   return (
     <article className='plantCard' id={plant_id}>
       <div className='img-container'>
