@@ -10,7 +10,7 @@ import SinglePlant from '../pages/SinglePlant';
 import ProtectedRoute from '../pages/ProtectedRoute';
 import Login from '../pages/Login';
 import Tasks from '../pages/Tasks';
-import Tools from '../pages/tools';
+import Account from '../pages/Account';
 import Ressources from '../pages/Ressources';
 import Error from '../pages/Error';
 const getToken = () => {
@@ -63,9 +63,7 @@ const App = () => {
                 setToken={setToken}
               />
             }
-          >
-            {/* <Route path='/ressources/tools' element={<tools />}></Route> */}
-          </Route>
+          ></Route>
           <Route
             path='/login'
             element={
@@ -84,10 +82,10 @@ const App = () => {
             }
           />
           <Route
-            path='/tools'
+            path='/account'
             element={
               <ProtectedRoute token={token}>
-                <Tools alert={alert} showAlert={showAlert} token={token} />
+                <Account alert={alert} showAlert={showAlert} token={token} />
               </ProtectedRoute>
             }
           />

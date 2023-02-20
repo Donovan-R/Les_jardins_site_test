@@ -44,8 +44,8 @@ export const linksPrivate = [
   },
   {
     id: 4,
-    url: '/tools',
-    text: 'outilthèque',
+    url: '/account',
+    text: 'mon compte',
   },
 ];
 

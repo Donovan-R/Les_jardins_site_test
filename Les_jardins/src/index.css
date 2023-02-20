@@ -295,6 +295,7 @@ nav {
     margin: 0 0.5rem;
   }
   .links a:hover {
+    padding: 0;
     padding-top: 0.5rem;
     background: transparent;
   }
@@ -320,6 +321,15 @@ Form           |
 .contactSection {
   background-image: url('https://images.pexels.com/photos/612338/pexels-photo-612338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
   padding: 2rem;
+  display: grid;
+  place-items: center;
+}
+
+.contactSection h4,
+.contactSection p {
+  color: var(--clr-green-deep-dark);
+  width: 75vw;
+  text-align: center;
 }
 
 .formEntire {
@@ -385,8 +395,7 @@ to Do page                 |
 .formCont {
   display: grid;
   text-align: center;
-  background-color: rgba(37, 105, 47, 0.5);
-
+  background-color: rgba(37, 105, 47, 0.7);
   width: 60%;
   margin: auto;
   border: solid 2px var(--clr-green-light);
@@ -477,7 +486,7 @@ to Do page                 |
   height: 100%;
   min-height: 78vh;
   inset: 0;
-  background-image: url('https://images.pexels.com/photos/169523/pexels-photo-169523.jpeg?auto=compress&cs=tinysrgb&w=600');
+  background-image: url('https://www.rustica.fr/images/01701-rust-1411641042-l870-h630.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

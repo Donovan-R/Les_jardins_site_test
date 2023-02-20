@@ -15,7 +15,7 @@ const Contact = ({ alert, showAlert, setToken }) => {
         savoir si vous êtes toujours intéressé, le moment venu.
       </h4>
       <p>
-        Avant tout, consultez le rgèlement intérieur de l'association{' '}
+        Avant tout, consultez le règlement intérieur de l'association{' '}
         <a href={reglement}>ici</a> (vous devrez l'accepter pour finaliser votre
         inscription)
       </p>
