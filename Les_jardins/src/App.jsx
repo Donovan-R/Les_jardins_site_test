@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
 import NavShared from '../pages/NavShared';
 import Home from '../pages/Home';
 import About from '../pages/About';
@@ -11,12 +10,13 @@ import ProtectedRoute from '../pages/ProtectedRoute';
 import Login from '../pages/Login';
 import Tasks from '../pages/Tasks';
 import Account from '../pages/Account';
+import Dashboard from '../pages/Dashboard';
 import Ressources from '../pages/Ressources';
 import Error from '../pages/Error';
 const getToken = () => {
   return localStorage.getItem('token') ? localStorage.getItem('token') : '';
 };
-
+const role = localStorage.getItem('role');
 const userName = localStorage.getItem('user');
 
 const App = () => {
@@ -37,7 +37,7 @@ const App = () => {
       <Routes>
         <Route
           path='/'
-          element={<NavShared token={token} setToken={setToken} />}
+          element={<NavShared token={token} setToken={setToken} role={role} />}
         >
           <Route index element={<Home />} />
 
@@ -77,7 +77,12 @@ const App = () => {
             path='/todo'
             element={
               <ProtectedRoute token={token}>
-                <Tasks alert={alert} showAlert={showAlert} token={token} />
+                <Tasks
+                  alert={alert}
+                  showAlert={showAlert}
+                  token={token}
+                  userName={userName}
+                />
               </ProtectedRoute>
             }
           />
@@ -86,6 +91,14 @@ const App = () => {
             element={
               <ProtectedRoute token={token}>
                 <Account alert={alert} showAlert={showAlert} token={token} />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/dashboard'
+            element={
+              <ProtectedRoute token={token} role={role}>
+                <Dashboard alert={alert} showAlert={showAlert} token={token} />
               </ProtectedRoute>
             }
           />

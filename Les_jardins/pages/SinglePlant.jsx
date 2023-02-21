@@ -27,7 +27,6 @@ const SinglePlant = () => {
       if (sowing_outside) {
         setSowingOutside(sowing_outside);
       }
-      console.log(data);
     } catch (error) {
       console.log(error);
     }

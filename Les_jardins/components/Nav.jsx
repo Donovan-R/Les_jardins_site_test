@@ -3,7 +3,8 @@ import { linksPublic, linksPrivate } from '../src/data';
 import { FaBars } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import logo from '.././assets/logo.png';
-
+const role = localStorage.getItem('role');
+console.log(role);
 const Navbar = ({ token, setToken }) => {
   const [isOpen, setIsOpen] = useState(false);
   const contRef = useRef(null);
@@ -38,7 +39,7 @@ const Navbar = ({ token, setToken }) => {
             {!token ? (
               <ul className='links' ref={linksRef}>
                 {linksPublic.map((link) => {
-                  const { id, text, url, sublinks } = link;
+                  const { id, text, url } = link;
                   return (
                     <li key={id}>
                       <Link to={url}>{text}</Link>
@@ -49,13 +50,18 @@ const Navbar = ({ token, setToken }) => {
             ) : (
               <ul className='links' ref={linksRef}>
                 {linksPrivate.map((link) => {
-                  const { id, text, url, sublinks } = link;
+                  const { id, text, url } = link;
                   return (
                     <li key={id}>
                       <Link to={url}>{text}</Link>
                     </li>
                   );
                 })}
+                {role == 1 && (
+                  <li>
+                    <Link to='/dashboard'>Espace admin</Link>
+                  </li>
+                )}
                 <li>
                   <Link to='/' onClick={disconnectUser}>
                     se déconnecter

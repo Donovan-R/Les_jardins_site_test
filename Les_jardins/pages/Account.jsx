@@ -1,13 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaEdit } from 'react-icons/fa';
 import Alert from '../components/Alert';
-const token = localStorage.getItem('token');
 
-const Account = ({ alert, showAlert }) => {
-  const [userInfos, setUserInfos] = useState([]);
-  // const [newUserInfos, setNewUserInfos] = useState([]);
-
+const Account = ({ alert, showAlert, token }) => {
+  const [userInfos, setUserInfos] = useState({
+    lastname: '',
+    firstname: '',
+    email: '',
+    mobile: '',
+  });
+  const [loading, setLoading] = useState(true);
   const url = 'http://localhost:5000/api/v1/account';
 
   const getUserAccount = async () => {
@@ -19,18 +22,23 @@ const Account = ({ alert, showAlert }) => {
           authorization: `Bearer ${token}`,
         },
       });
-      setUserInfos(user[0]);
+      setUserInfos({
+        lastname: user[0].lastname,
+        firstname: user[0].firstname,
+        email: user[0].email,
+        mobile: user[0].mobile,
+      });
+      setLoading(false);
       // setNewUserInfos(userInfos);
     } catch (error) {
       console.log(error);
+      showAlert(error, 'danger', true);
     }
   };
 
   useEffect(() => {
     getUserAccount();
-  }, []);
-
-  const { firstname, lastname, email, mobile } = userInfos;
+  }, [token]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,12 +59,15 @@ const Account = ({ alert, showAlert }) => {
     }
   };
 
-  if (token) {
+  if (loading) {
+    <p>chargement en cours</p>;
+  } else {
     return (
       <>
         <div>
           <h2>
-            voici vos informations personnelles {firstname} {lastname}:
+            voici vos informations personnelles {userInfos.firstname}{' '}
+            {userInfos.lastname}:
           </h2>
         </div>
         <section className='section'>
@@ -65,9 +76,9 @@ const Account = ({ alert, showAlert }) => {
           </div>
           <div className='userInfos'>
             <div className='userInfo'>
-              <p>mon nom : {lastname}</p>
+              <p>mon nom : {userInfos.lastname}</p>
               <input
-                defaultValue={lastname}
+                value={userInfos.lastname}
                 name='lastname'
                 type='text'
                 placeholder='nouvelle valeur'
@@ -77,9 +88,9 @@ const Account = ({ alert, showAlert }) => {
               />
             </div>
             <div className='userInfo'>
-              <p>mon prénom : {firstname}</p>
+              <p>mon prénom : {userInfos.firstname}</p>
               <input
-                defaultValue={firstname}
+                value={userInfos.firstname}
                 name='firtsname'
                 type='text'
                 placeholder='nouvelle valeur'
@@ -92,9 +103,9 @@ const Account = ({ alert, showAlert }) => {
               />
             </div>
             <div className='userInfo'>
-              <p>mon adress électronique : {email}</p>
+              <p>mon adress électronique : {userInfos.email}</p>
               <input
-                defaultValue={email}
+                value={userInfos.email}
                 name='email'
                 type='mail'
                 placeholder='nouvelle valeur'
@@ -104,9 +115,9 @@ const Account = ({ alert, showAlert }) => {
               />
             </div>
             <div className='userInfo'>
-              <p>mon numéro de téléphone : {mobile}</p>
+              <p>mon numéro de téléphone : {userInfos.mobile}</p>
               <input
-                defaultValue={mobile}
+                value={userInfos.mobile}
                 name='mobile'
                 type='tel'
                 placeholder='nouvelle valeur'

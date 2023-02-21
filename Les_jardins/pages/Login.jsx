@@ -36,16 +36,14 @@ const Login = ({ alert, showAlert, setToken }) => {
 
   const connectUser = async (e) => {
     e.preventDefault();
-    console.log(user);
     try {
       const { data } = await axios.post(
         'http://localhost:5000/api/v1/auth/login',
         user
       );
-
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', user.email);
-      // localStorage.setItem('username', user.firstname)
+      localStorage.setItem('role', data.role);
       setToken(data.token);
       navigate('/todo');
     } catch (error) {
