@@ -53,6 +53,7 @@ const Account = ({ alert, showAlert, token }) => {
           },
         }
       );
+      showAlert('vos informations ont été modifiées', 'success', true);
     } catch (error) {
       console.log(error);
       showAlert(error, 'danger', true);
@@ -74,7 +75,7 @@ const Account = ({ alert, showAlert, token }) => {
           <div className='alertSection'>
             {alert.show && <Alert {...alert} removeAlert={showAlert} />}
           </div>
-          <div className='userInfos'>
+          <form className='userInfos'>
             <div className='userInfo'>
               <p>mon nom : {userInfos.lastname}</p>
               <input
@@ -139,7 +140,7 @@ const Account = ({ alert, showAlert, token }) => {
               </label>
               <input type='password' className='newPassword' />
             </div>
-          </div>
+          </form>
         </section>
       </>
     );
