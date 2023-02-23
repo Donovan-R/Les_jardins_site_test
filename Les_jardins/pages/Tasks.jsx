@@ -5,7 +5,7 @@ import Alert from '../components/Alert';
 import axios from 'axios';
 import { FaExclamationTriangle } from 'react-icons/fa';
 
-const Tasks = ({ alert, showAlert, userName }) => {
+const Tasks = ({ alert, showAlert, user }) => {
   const [tasks, setTasks] = useState([]);
   const [taskAdded, setTaskAdded] = useState('');
   const [isCompleted, setIsCompleted] = useState(false);
@@ -172,7 +172,7 @@ const Tasks = ({ alert, showAlert, userName }) => {
   return (
     <>
       <section className='toDoSection'>
-        <span style={{ color: 'white' }}>identifiant : {userName}</span>
+        <span style={{ color: 'white' }}>bienvenue {user.name}</span>
         <h2>Mes tâches</h2>
         <div className='alertSection'>
           {alert.show && <Alert {...alert} removeAlert={showAlert} />}

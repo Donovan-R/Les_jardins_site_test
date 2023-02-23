@@ -3,9 +3,7 @@ import { linksPublic, linksPrivate } from '../src/data';
 import { FaBars } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import logo from '.././assets/logo.png';
-const role = localStorage.getItem('role');
-console.log(role);
-const Navbar = ({ token, setToken }) => {
+const Navbar = ({ token, setToken, user }) => {
   const [isOpen, setIsOpen] = useState(false);
   const contRef = useRef(null);
   const linksRef = useRef(null);
@@ -57,7 +55,7 @@ const Navbar = ({ token, setToken }) => {
                     </li>
                   );
                 })}
-                {role == 1 && (
+                {user.role == 2 && (
                   <li>
                     <Link to='/dashboard'>Espace admin</Link>
                   </li>

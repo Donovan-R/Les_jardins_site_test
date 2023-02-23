@@ -699,8 +699,57 @@ dashboard   |
 =============
 */
 
+.dashboardSection {
+  padding-top: 1rem;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.warningTitle {
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  column-gap: 0.5rem;
+  place-items: center;
+  color: red;
+  border: solid 2px yellow;
+}
+
 .usersTable {
   width: 90vw;
+  background-color: hsla(86, 97%, 54%, 30%);
+  border: solid 1px hsla(105, 92%, 52%, 0.708);
+  min-width: 300px;
+}
+
+.usersTable thead {
+  background-color: hsla(86, 88%, 64%, 0.3);
+  font-size: 1rem;
+  text-transform: capitalize;
+  border-bottom: solid 1px hsla(105, 88%, 67%, 0.708);
+}
+
+.optionalColumn,
+.optionalColumnBis {
+  display: none;
+}
+
+@media screen and (min-width: 700px) {
+  .optionalColumn,
+  .optionalColumnBis {
+    display: revert;
+  }
+}
+
+.modifyUserForm {
+  z-index: 999;
+  position: absolute;
+  /* height: auto; */
+  inset: 0;
+
+  background-color: hsla(125, 71%, 66%, 80%);
 }
 
 /*

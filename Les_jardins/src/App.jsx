@@ -16,12 +16,16 @@ import Error from '../pages/Error';
 const getToken = () => {
   return localStorage.getItem('token') ? localStorage.getItem('token') : '';
 };
-const role = localStorage.getItem('role');
-const userName = localStorage.getItem('user');
+const getUser = () => {
+  return localStorage.getItem('user')
+    ? JSON.parse(localStorage.getItem('user'))
+    : '';
+};
 
 const App = () => {
   const [alert, setAlert] = useState({ msg: '', type: '', show: false });
   const [token, setToken] = useState(getToken());
+  const [user, setUser] = useState(getUser());
 
   const showAlert = (msg = '', type = '', show = false) => {
     setAlert({
@@ -37,7 +41,7 @@ const App = () => {
       <Routes>
         <Route
           path='/'
-          element={<NavShared token={token} setToken={setToken} role={role} />}
+          element={<NavShared token={token} setToken={setToken} user={user} />}
         >
           <Route index element={<Home />} />
 
@@ -67,7 +71,12 @@ const App = () => {
           <Route
             path='/login'
             element={
-              <Login alert={alert} showAlert={showAlert} setToken={setToken} />
+              <Login
+                alert={alert}
+                showAlert={showAlert}
+                setToken={setToken}
+                setUser={setUser}
+              />
             }
           >
             {' '}
@@ -81,7 +90,7 @@ const App = () => {
                   alert={alert}
                   showAlert={showAlert}
                   token={token}
-                  userName={userName}
+                  user={user}
                 />
               </ProtectedRoute>
             }
@@ -97,7 +106,7 @@ const App = () => {
           <Route
             path='/dashboard'
             element={
-              <ProtectedRoute token={token} role={role}>
+              <ProtectedRoute token={token}>
                 <Dashboard alert={alert} showAlert={showAlert} token={token} />
               </ProtectedRoute>
             }

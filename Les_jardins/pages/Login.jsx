@@ -5,7 +5,7 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import Alert from '../components/Alert';
 import axios from 'axios';
 
-const Login = ({ alert, showAlert, setToken }) => {
+const Login = ({ alert, showAlert, setToken, setUser }) => {
   //* changer password type
   const [passwordType, setPasswordType] = useState('password');
   const togglePassword = () => {
@@ -17,7 +17,7 @@ const Login = ({ alert, showAlert, setToken }) => {
   };
 
   //* gérer l'user
-  const [user, setUser] = useState({
+  const [userInput, setUserInput] = useState({
     email: '',
     password: '',
   });
@@ -25,7 +25,7 @@ const Login = ({ alert, showAlert, setToken }) => {
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setUser({ ...user, [name]: value });
+    setUserInput({ ...userInput, [name]: value });
   };
 
   const handleSubmit = (e) => {
@@ -39,15 +39,17 @@ const Login = ({ alert, showAlert, setToken }) => {
     try {
       const { data } = await axios.post(
         'http://localhost:5000/api/v1/auth/login',
-        user
+        userInput
       );
       localStorage.setItem('token', data.token);
-      localStorage.setItem('user', user.email);
-      localStorage.setItem('role', data.role);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      // localStorage.setItem('role', data.role);
       setToken(data.token);
+      setUser(data.user);
       navigate('/todo');
     } catch (error) {
-      showAlert('invalide', 'danger', true);
+      showAlert(error.msg, 'danger', true);
+      console.log(error);
       localStorage.removeItem('token');
     }
   };
@@ -66,7 +68,7 @@ const Login = ({ alert, showAlert, setToken }) => {
                 type='mail'
                 className='formInput'
                 name='email'
-                value={user.email}
+                value={userInput.email}
                 onChange={handleChange}
                 placeholder='exemple@mail.com'
               />
@@ -76,7 +78,7 @@ const Login = ({ alert, showAlert, setToken }) => {
               <input
                 type={passwordType}
                 onChange={handleChange}
-                value={user.password}
+                value={userInput.password}
                 name='password'
                 className='formInput'
                 placeholder='mot de passe'

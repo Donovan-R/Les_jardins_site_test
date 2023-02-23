@@ -4,14 +4,17 @@ import { FaEdit } from 'react-icons/fa';
 import Alert from '../components/Alert';
 
 const Account = ({ alert, showAlert, token }) => {
+  const [originalPassword, setOriginalPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
   const [userInfos, setUserInfos] = useState({
     lastname: '',
     firstname: '',
     email: '',
     mobile: '',
+    id: '',
   });
   const [loading, setLoading] = useState(true);
-  const url = 'http://localhost:5000/api/v1/account';
+  const url = 'http://localhost:5000/api/v1/account/';
 
   const getUserAccount = async () => {
     try {
@@ -27,11 +30,12 @@ const Account = ({ alert, showAlert, token }) => {
         firstname: user[0].firstname,
         email: user[0].email,
         mobile: user[0].mobile,
+        id: user[0].user_id,
       });
       setLoading(false);
       // setNewUserInfos(userInfos);
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
       showAlert(error, 'danger', true);
     }
   };
@@ -42,7 +46,6 @@ const Account = ({ alert, showAlert, token }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(userInfos);
     try {
       await axios.put(
         url,
@@ -56,7 +59,29 @@ const Account = ({ alert, showAlert, token }) => {
       showAlert('vos informations ont été modifiées', 'success', true);
     } catch (error) {
       console.log(error);
-      showAlert(error, 'danger', true);
+      showAlert(error.response.data.msg, 'danger', true);
+    }
+  };
+
+  const changePassword = async (e) => {
+    e.preventDefault();
+    const id = userInfos.id;
+    try {
+      await axios.put(
+        `${url}${id}`,
+        { originalPassword, newPassword },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setNewPassword('');
+      setOriginalPassword('');
+      showAlert('votre mot de passe a bien été modifié', 'success', true);
+    } catch (error) {
+      console.log(error.response.data.msg);
+      showAlert(error.response.data.msg, 'danger', true);
     }
   };
 
@@ -75,7 +100,12 @@ const Account = ({ alert, showAlert, token }) => {
           <div className='alertSection'>
             {alert.show && <Alert {...alert} removeAlert={showAlert} />}
           </div>
-          <form className='userInfos'>
+          <form
+            className='userInfos'
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
             <div className='userInfo'>
               <p>mon nom : {userInfos.lastname}</p>
               <input
@@ -130,16 +160,28 @@ const Account = ({ alert, showAlert, token }) => {
             <div>
               <button onClick={handleSubmit}>modifier</button>
             </div>
-            <div className='passwordToSet'>
-              <label htmlFor='originalpassword'>
-                saisissez votre mot de passe actuel
-              </label>
-              <input type='password' name='originalPassword' />
-              <label htmlFor='newPassword'>
-                saisissez votre nouveau mot de passe
-              </label>
-              <input type='password' className='newPassword' />
-            </div>
+          </form>
+          <form className='passwordToSet' onSubmit={changePassword}>
+            <label htmlFor='originalPassword'>
+              saisissez votre mot de passe actuel
+            </label>
+            <input
+              type='password'
+              name='originalPassword'
+              value={originalPassword}
+              onChange={(e) => setOriginalPassword(e.target.value)}
+            />
+            <br />
+            <label htmlFor='newPassword'>
+              saisissez votre nouveau mot de passe
+            </label>
+            <input
+              type='password'
+              className='newPassword'
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+            <button>changer de mot de passe</button>
           </form>
         </section>
       </>
