@@ -7,6 +7,8 @@ const SinglePlant = () => {
   const [plantDetails, setPlantDetails] = useState([]);
   const [sowingInside, setSowingInside] = useState([]);
   const [sowingOutside, setSowingOutside] = useState([]);
+  const [plantsFriends, setPlantsFriends] = useState([]);
+  const [plantsEnnemies, setPlantsEnnemies] = useState([]);
   const { id } = useParams();
   const url = 'http://localhost:5000/api/v1/plants/';
 
@@ -17,6 +19,8 @@ const SinglePlant = () => {
           plant: plant,
           sowing_inside: sowing_inside,
           sowing_outside: sowing_outside,
+          plants_friends: plants_friends_name,
+          plants_ennemies: plants_ennemies_name,
         },
       } = await axios.get(`${url}${id}`);
       setPlantDetails(plant);
@@ -26,6 +30,13 @@ const SinglePlant = () => {
 
       if (sowing_outside) {
         setSowingOutside(sowing_outside);
+      }
+
+      if (plants_friends_name) {
+        setPlantsFriends(plants_friends_name);
+      }
+      if (plants_ennemies_name) {
+        setPlantsEnnemies(plants_ennemies_name);
       }
     } catch (error) {
       console.log(error);
@@ -48,6 +59,10 @@ const SinglePlant = () => {
 
   const { sowing_date_start_inside, sowing_date_end_inside } = sowingInside;
   const { sowing_date_start_outside, sowing_date_end_outside } = sowingOutside;
+
+  const { plants_friends_name } = plantsFriends;
+
+  const { plants_ennemies_name } = plantsEnnemies;
 
   return (
     <>
@@ -93,17 +108,30 @@ const SinglePlant = () => {
           <div className='culturePlant'>
             <h3>conseils pour la culture :</h3>
             <p>{crop}</p>
-            <h4>rotation des cultures</h4>
-            <p>{crop_rotation}</p>
+            {crop_rotation && (
+              <>
+                {' '}
+                <h4>
+                  <strong>rotation des cultures :</strong>
+                </h4>
+                <p>{crop_rotation}</p>
+              </>
+            )}
           </div>
 
-          <div className='cohabPlants'>
-            <h3>cohabitation</h3>
-            <h4>ce plant pourra cohabiter avec :</h4>
-            <p></p>
-            <h4>a contrario, il vaudra mieux éviter de l'associer à :</h4>
-            <p></p>
-          </div>
+          {(plants_friends_name || plants_ennemies_name) && (
+            <div className='cohabPlants'>
+              <h3>cohabitation</h3>
+              {plants_friends_name &&
+                `ce plant pourra cohabiter avec : ${plants_friends_name}`}
+              {plants_ennemies_name && (
+                <>
+                  <h4>a contrario, il vaudra mieux éviter de l'associer à :</h4>
+                  <p>{plants_ennemies_name}</p>
+                </>
+              )}
+            </div>
+          )}
         </div>
       </section>
     </>

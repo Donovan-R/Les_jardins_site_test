@@ -96,92 +96,100 @@ const Account = ({ alert, showAlert, token }) => {
             {userInfos.lastname}:
           </h2>
         </div>
-        <section className='section'>
+        <section className='accountSection'>
           <div className='alertSection'>
             {alert.show && <Alert {...alert} removeAlert={showAlert} />}
           </div>
           <form
-            className='userInfos'
+            className='formContainer'
             onSubmit={(e) => {
               e.preventDefault();
             }}
           >
-            <div className='userInfo'>
-              <p>mon nom : {userInfos.lastname}</p>
-              <input
-                value={userInfos.lastname}
-                name='lastname'
-                type='text'
-                placeholder='nouvelle valeur'
-                onChange={(e) =>
-                  setUserInfos({ ...userInfos, lastname: e.target.value })
-                }
-              />
-            </div>
-            <div className='userInfo'>
-              <p>mon prénom : {userInfos.firstname}</p>
-              <input
-                value={userInfos.firstname}
-                name='firtsname'
-                type='text'
-                placeholder='nouvelle valeur'
-                onChange={(e) =>
-                  setUserInfos({
-                    ...userInfos,
-                    firstname: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <div className='userInfo'>
-              <p>mon adress électronique : {userInfos.email}</p>
-              <input
-                value={userInfos.email}
-                name='email'
-                type='mail'
-                placeholder='nouvelle valeur'
-                onChange={(e) =>
-                  setUserInfos({ ...userInfos, email: e.target.value })
-                }
-              />
-            </div>
-            <div className='userInfo'>
-              <p>mon numéro de téléphone : {userInfos.mobile}</p>
-              <input
-                value={userInfos.mobile}
-                name='mobile'
-                type='tel'
-                placeholder='nouvelle valeur'
-                onChange={(e) =>
-                  setUserInfos({ ...userInfos, mobile: e.target.value })
-                }
-              />
-            </div>
-            <div>
-              <button onClick={handleSubmit}>modifier</button>
-            </div>
+            <fieldset>
+              <legend>mes informations</legend>
+              <div className='formRow'>
+                <label htmlFor='lastname'>mon nom</label>
+                <input
+                  className='formInput'
+                  value={userInfos.lastname}
+                  name='lastname'
+                  type='text'
+                  placeholder='nouvelle valeur'
+                  onChange={(e) =>
+                    setUserInfos({ ...userInfos, lastname: e.target.value })
+                  }
+                />
+              </div>
+              <div className='formRow'>
+                <label htmlFor='firstname'>mon prénom</label>
+                <input
+                  value={userInfos.firstname}
+                  name='firtsname'
+                  type='text'
+                  placeholder='nouvelle valeur'
+                  onChange={(e) =>
+                    setUserInfos({
+                      ...userInfos,
+                      firstname: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className='formRow'>
+                <label htmlFor='email'>mon adresse électronique</label>
+                <input
+                  value={userInfos.email}
+                  name='email'
+                  type='mail'
+                  placeholder='nouvelle valeur'
+                  onChange={(e) =>
+                    setUserInfos({ ...userInfos, email: e.target.value })
+                  }
+                />
+              </div>
+              <div className='formRow'>
+                <label htmlFor='mobile'>mon numéro de téléphone</label>
+                <input
+                  value={userInfos.mobile}
+                  name='mobile'
+                  type='tel'
+                  placeholder='nouvelle valeur'
+                  onChange={(e) =>
+                    setUserInfos({ ...userInfos, mobile: e.target.value })
+                  }
+                />
+              </div>
+              <div>
+                <button onClick={handleSubmit}>modifier</button>
+              </div>
+            </fieldset>
           </form>
-          <form className='passwordToSet' onSubmit={changePassword}>
-            <label htmlFor='originalPassword'>
-              saisissez votre mot de passe actuel
-            </label>
-            <input
-              type='password'
-              name='originalPassword'
-              value={originalPassword}
-              onChange={(e) => setOriginalPassword(e.target.value)}
-            />
-            <br />
-            <label htmlFor='newPassword'>
-              saisissez votre nouveau mot de passe
-            </label>
-            <input
-              type='password'
-              className='newPassword'
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-            <button>changer de mot de passe</button>
+          <form className='formContainer' onSubmit={changePassword}>
+            <fieldset>
+              <legend>changer mon mot de passe</legend>
+              <label htmlFor='originalPassword'>
+                saisissez votre mot de passe actuel
+              </label>
+              <input
+                className='formRow'
+                type='password'
+                name='originalPassword'
+                value={originalPassword}
+                onChange={(e) => setOriginalPassword(e.target.value)}
+              />
+              <br />
+              <label htmlFor='newPassword'>
+                saisissez votre nouveau mot de passe
+              </label>
+              <input
+                className='formRow'
+                type='password'
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+              <button>changer de mot de passe</button>
+            </fieldset>
           </form>
         </section>
       </>

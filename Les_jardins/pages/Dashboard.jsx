@@ -69,7 +69,6 @@ const Dashboard = ({ alert, showAlert, token }) => {
       name: userFiltered[0].name,
       user_id: userFiltered[0].user_id,
     });
-    console.log(userFiltered[0].name);
     userFiltered = null;
   };
 
@@ -109,65 +108,74 @@ const Dashboard = ({ alert, showAlert, token }) => {
   };
 
   return (
-    <section className='dashboardSection'>
-      <div className='alertSection'>
-        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
-      </div>
-      <h3 className='warningTitle'>
-        <GiButterflyWarning /> Attention toutes les modifications sont
-        définitives <GiButterflyWarning />
-      </h3>
-      <table className='usersTable'>
-        <thead>
-          <tr>
-            <th colSpan='6'>Tableau des utilisateurs</th>
-          </tr>
-        </thead>
-        <thead>
-          <tr>
-            <th>nom</th>
-            <th>prénom</th>
-            <th>téléphone</th>
-            <th className='optionalColumn'>adresse électronique</th>
-            <th>rôle</th>
-            <th>actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {newUsers.map((user) => {
-            const {
-              user_id: id,
-              firstname,
-              lastname,
-              email,
-              mobile,
-              role_id,
-              name,
-            } = user;
-            return (
-              <tr key={id}>
-                <td>{lastname}</td>
-                <td>{firstname}</td>
-                <td>{mobile}</td>
-                <td className='optionalColumn'>{email} </td>
-                <td>{name}</td>
-                <td>
-                  <button onClick={() => deleteUser(id)} className='deleteBtn'>
-                    <GrTrash />
-                  </button>
-                  <button onClick={() => editUser(id)} className='editBtn'>
-                    <FaEdit />
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+    <>
+      <section className='dashboardSection'>
+        <div className='alertSection'>
+          {alert.show && <Alert {...alert} removeAlert={showAlert} />}
+        </div>
+        <h3 className='warningTitle'>
+          <GiButterflyWarning /> Attention toutes les modifications sont
+          définitives <GiButterflyWarning />
+        </h3>
+        <table className='usersTable'>
+          <thead>
+            <tr>
+              <th colSpan='6'>Tableau des utilisateurs</th>
+            </tr>
+          </thead>
+          <thead>
+            <tr>
+              <th>nom</th>
+              <th>prénom</th>
+              <th>téléphone</th>
+              <th className='optionalColumn'>adresse électronique</th>
+              <th>rôle</th>
+              <th>actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {newUsers.map((user) => {
+              const {
+                user_id: id,
+                firstname,
+                lastname,
+                email,
+                mobile,
+                role_id,
+                name,
+              } = user;
+              return (
+                <tr key={id}>
+                  <td>{lastname}</td>
+                  <td>{firstname}</td>
+                  <td>{mobile}</td>
+                  <td className='optionalColumn'>{email} </td>
+                  <td>{name}</td>
+                  <td>
+                    <button
+                      onClick={() => deleteUser(id)}
+                      className='deleteBtn'
+                    >
+                      <GrTrash />
+                    </button>
+                    <button onClick={() => editUser(id)} className='editBtn'>
+                      <FaEdit />
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </section>
       {isFormOpen && (
-        <div className='modifyUserForm'>
-          <h3>formulaire de modification de compte</h3>
-          <form className='formCont'>
+        <section className='modifyUserSection'>
+          <h3 className='warningTitle'>
+            <GiButterflyWarning /> Attention toutes les modifications sont
+            définitives <GiButterflyWarning />
+          </h3>
+          <form className='formAdmin'>
+            <h3>formulaire de modification de compte</h3>
             <label htmlFor='lastname'>Nom</label>
             <input
               className=''
@@ -219,35 +227,43 @@ const Dashboard = ({ alert, showAlert, token }) => {
                 setUserToEdit({ ...userToEdit, role_id: e.target.value })
               }
             />
-            <div>
-              <button onClick={validEditUser}>Valider</button>
-              <button onClick={() => setIsFormOpen(false)}>Annuler</button>
+            <div className='adminFormBtn'>
+              <button onClick={validEditUser} className='validBtnAdmin'>
+                Valider
+              </button>
+              <button
+                onClick={() => setIsFormOpen(false)}
+                className='cancelBtnAdmin'
+              >
+                Annuler
+              </button>
             </div>
+
+            <table className='legendAdmin'>
+              <thead>
+                <tr>
+                  <th colSpan={'2'}>attribution d'un rôle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>droit</th>
+                  <th>chiffre</th>
+                </tr>
+                <tr>
+                  <td>utilisateur</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>administrateur</td>
+                  <td>2</td>
+                </tr>
+              </tbody>
+            </table>
           </form>
-          <div className='legend'>
-            <thead>
-              <tr>
-                <th>attribution d'un rôle</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>droit</th>
-                <th>chiffre</th>
-              </tr>
-              <tr>
-                <td>admin</td>
-                <td>2</td>
-              </tr>
-              <tr>
-                <td>user</td>
-                <td>1</td>
-              </tr>
-            </tbody>
-          </div>
-        </div>
+        </section>
       )}
-    </section>
+    </>
   );
 };
 

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SimpleSlider } from '../components/SimpleSlider';
 import { FaRegPaperPlane } from 'react-icons/fa';
 
 const Home = () => {
+  const [isLoading, setIsLoading] = useState(true);
   return (
     <>
       <section className='section'>

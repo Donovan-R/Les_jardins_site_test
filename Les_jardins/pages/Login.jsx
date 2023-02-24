@@ -98,12 +98,12 @@ const Login = ({ alert, showAlert, setToken, setUser }) => {
             </div>
           </form>
         </div>
+        <Link to='/'>
+          <span className='backHome'>
+            <GiBirdHouse />
+          </span>
+        </Link>
       </div>
-      <Link to='/'>
-        <span className='backHome'>
-          <GiBirdHouse />
-        </span>
-      </Link>
     </>
   );
 };
