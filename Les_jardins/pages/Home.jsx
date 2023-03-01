@@ -35,11 +35,6 @@ const Home = () => {
             molestia
           </p>
         </div>
-        <div className='backUp'>
-          <a className='goUp' href='#'>
-            <FaRegPaperPlane />
-          </a>
-        </div>
       </section>
     </>
   );

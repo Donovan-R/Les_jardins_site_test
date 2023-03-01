@@ -5,7 +5,11 @@ import { FaEdit } from 'react-icons/fa';
 import { GiButterflyWarning } from 'react-icons/gi';
 import Alert from '../components/Alert';
 
-const Dashboard = ({ alert, showAlert, token }) => {
+const Dashboard = ({ alert, showAlert, token, user }) => {
+  const url = 'http://localhost:5000/api/v1/dash/';
+  const urlPlants = 'http://localhost:5000/api/v1/plants/';
+  const [plantationsTab, setPlantationsTab] = useState([]);
+  let plantsTabDashboard = [...plantationsTab];
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -20,7 +24,6 @@ const Dashboard = ({ alert, showAlert, token }) => {
   });
 
   let newUsers = [...users];
-  const url = 'http://localhost:5000/api/v1/dash/';
 
   const getUsers = async () => {
     try {
@@ -107,6 +110,32 @@ const Dashboard = ({ alert, showAlert, token }) => {
     });
   };
 
+  const getAllPlantsAdmin = async () => {
+    try {
+      const { data } = await axios.get(urlPlants);
+      setPlantationsTab(data.plants);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+  useEffect(() => {
+    getAllPlantsAdmin();
+  }, []);
+
+  const getSinglePlantInfos = async (plant_id) => {
+    try {
+      const { data } = await axios.get(`${url}${plant_id}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error.response);
+      showAlert(error.response.data.msg, 'danger', true);
+    }
+  };
+
   return (
     <>
       <section className='dashboardSection'>
@@ -125,8 +154,8 @@ const Dashboard = ({ alert, showAlert, token }) => {
           </thead>
           <thead>
             <tr>
-              <th>nom</th>
               <th>prénom</th>
+              <th>nom</th>
               <th>téléphone</th>
               <th className='optionalColumn'>adresse électronique</th>
               <th>rôle</th>
@@ -146,8 +175,8 @@ const Dashboard = ({ alert, showAlert, token }) => {
               } = user;
               return (
                 <tr key={id}>
-                  <td>{lastname}</td>
                   <td>{firstname}</td>
+                  <td>{lastname}</td>
                   <td>{mobile}</td>
                   <td className='optionalColumn'>{email} </td>
                   <td>{name}</td>
@@ -168,6 +197,31 @@ const Dashboard = ({ alert, showAlert, token }) => {
           </tbody>
         </table>
       </section>
+      <hr />
+      {user.name === 'donovan' && user.email === 'donoriviere@gmail.com' && (
+        <section>
+          <h2>espace réservé à {user.name}</h2>
+          <div className='plantsTabDashboard'>
+            {plantsTabDashboard.map((plant) => {
+              const { name, main_img, plant_id } = plant;
+              return (
+                <div
+                  key={plant_id}
+                  className='plantCardDashboard'
+                  onClick={() => getSinglePlantInfos(plant_id)}
+                >
+                  <img
+                    src={main_img}
+                    alt={name}
+                    className='plantPictureDashboard'
+                  />
+                  <h4>{name}</h4>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
       {isFormOpen && (
         <section className='modifyUserSection'>
           <h3 className='warningTitle'>

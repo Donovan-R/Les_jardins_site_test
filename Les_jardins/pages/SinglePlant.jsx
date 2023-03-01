@@ -48,13 +48,17 @@ const SinglePlant = () => {
   }, []);
   const {
     plant_name,
-    img,
+    main_img,
+    img_inter,
+    img_plant,
     plantation_date_start,
     plantation_date_end,
     plantation_details,
     sowing_details,
     crop,
     crop_rotation,
+    rows_spacing_in_cm,
+    plants_spacing_in_cm,
   } = plantDetails;
 
   const { sowing_date_start_inside, sowing_date_end_inside } = sowingInside;
@@ -78,41 +82,76 @@ const SinglePlant = () => {
       >
         <div className='plantsTitle'>
           <div className='singlePlantPictures'>
-            <img src={img} alt={plant_name} className='singlePlantPicture' />
-            <img src={img} alt={plant_name} className='singlePlantPicture' />
-            <img src={img} alt={plant_name} className='singlePlantPicture' />
+            <img
+              src={img_plant}
+              alt={plant_name}
+              className='singlePlantPicture'
+            />
+            <img
+              src={img_inter}
+              alt={plant_name}
+              className='singlePlantPicture'
+            />
+            <img
+              src={main_img}
+              alt={plant_name}
+              className='singlePlantPicture'
+            />
           </div>{' '}
         </div>
         <div className='underline'></div>
 
         <div className='plantsDetails'>
           <div className='semisDetails'>
-            <h3>
-              {sowing_date_start_inside &&
-                `les semis se font sous abri du ${sowing_date_start_inside} au
-                  ${sowing_date_end_inside} `}
-              <br />
-              {sowing_date_start_outside &&
-                `les semis se font en pleine terre du
-              ${sowing_date_start_outside} au ${sowing_date_end_outside}`}
-            </h3>
+            {sowing_date_start_inside && (
+              <h3>
+                {' '}
+                Les semis se font sous abri du {sowing_date_start_inside} au
+                {sowing_date_end_inside}
+              </h3>
+            )}
+            {sowing_date_start_outside && (
+              <h3>
+                Les semis se font en pleine terre du
+                {sowing_date_start_outside} au {sowing_date_end_outside}
+              </h3>
+            )}
+
             <p>{sowing_details}</p>
           </div>
           <div className='plantationDetails'>
             <h3>
-              la plantation se fait du {plantation_date_start} au
+              La plantation se fait du {plantation_date_start} au
               {plantation_date_end}
             </h3>
             <p>{plantation_details}</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>espace conseillé</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>entre les plants</td>
+                  <td>{plants_spacing_in_cm} cm</td>
+                </tr>
+                <tr>
+                  <td>entre les lignes</td>
+
+                  <td>{rows_spacing_in_cm} cm</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div className='culturePlant'>
-            <h3>conseils pour la culture :</h3>
+            <h3>Conseils pour la culture :</h3>
             <p>{crop}</p>
             {crop_rotation && (
               <>
                 {' '}
                 <h4>
-                  <strong>rotation des cultures :</strong>
+                  <strong>Rotation des cultures :</strong>
                 </h4>
                 <p>{crop_rotation}</p>
               </>
@@ -121,12 +160,13 @@ const SinglePlant = () => {
 
           {(plants_friends_name || plants_ennemies_name) && (
             <div className='cohabPlants'>
-              <h3>cohabitation</h3>
-              {plants_friends_name &&
-                `ce plant pourra cohabiter avec : ${plants_friends_name}`}
+              <h3>Cohabitation</h3>
+              {plants_friends_name && (
+                <h4>Ce plant pourra cohabiter avec : {plants_friends_name}</h4>
+              )}
               {plants_ennemies_name && (
                 <>
-                  <h4>a contrario, il vaudra mieux éviter de l'associer à :</h4>
+                  <h4>A contrario, il vaudra mieux éviter de l'associer à :</h4>
                   <p>{plants_ennemies_name}</p>
                 </>
               )}

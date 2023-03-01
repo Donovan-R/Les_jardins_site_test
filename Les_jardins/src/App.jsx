@@ -7,6 +7,7 @@ import Contact from '../pages/Contact';
 import Plantations from '../pages/Plantations';
 import SinglePlant from '../pages/SinglePlant';
 import ProtectedRoute from '../pages/ProtectedRoute';
+import ProtectedRouteAdmin from '../pages/ProtectedRouteAdmin';
 import Login from '../pages/Login';
 import Tasks from '../pages/Tasks';
 import Account from '../pages/Account';
@@ -106,9 +107,14 @@ const App = () => {
           <Route
             path='/dashboard'
             element={
-              <ProtectedRoute token={token}>
-                <Dashboard alert={alert} showAlert={showAlert} token={token} />
-              </ProtectedRoute>
+              <ProtectedRouteAdmin token={token} user={user}>
+                <Dashboard
+                  alert={alert}
+                  showAlert={showAlert}
+                  token={token}
+                  user={user}
+                />
+              </ProtectedRouteAdmin>
             }
           />
         </Route>

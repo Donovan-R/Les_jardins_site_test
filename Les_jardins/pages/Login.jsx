@@ -43,13 +43,11 @@ const Login = ({ alert, showAlert, setToken, setUser }) => {
       );
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
-      // localStorage.setItem('role', data.role);
       setToken(data.token);
       setUser(data.user);
       navigate('/todo');
     } catch (error) {
-      showAlert(error.msg, 'danger', true);
-      console.log(error);
+      showAlert(error.response.data.msg, 'danger', true);
       localStorage.removeItem('token');
     }
   };
@@ -58,7 +56,10 @@ const Login = ({ alert, showAlert, setToken, setUser }) => {
     <>
       <h2>connexion</h2>
       <div className='formEntire'>
-        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
+        <div className='alertSection'>
+          {alert.show && <Alert {...alert} removeAlert={showAlert} />}
+        </div>
+
         <h3>Veuillez vous connecter pour accèder à votre espace</h3>
         <div className='formContainer'>
           <form action='' onSubmit={handleSubmit}>
@@ -98,11 +99,6 @@ const Login = ({ alert, showAlert, setToken, setUser }) => {
             </div>
           </form>
         </div>
-        <Link to='/'>
-          <span className='backHome'>
-            <GiBirdHouse />
-          </span>
-        </Link>
       </div>
     </>
   );

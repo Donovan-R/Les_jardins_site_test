@@ -18,16 +18,18 @@ const About = () => {
           convivialité en un lieu champêtre, alors n’hésitez pas à vous adresser
           à l’association par courrier
         </p>
-
+        {/* 
         <Link to='/'>
           <span className='backHome'>
             <GiBirdHouse />
           </span>
         </Link>
 
-        <a href='#' className='goUp'>
-          <FaRegPaperPlane />
-        </a>
+        <div className='goUp'>
+          <a href='#'>
+            <FaRegPaperPlane />
+          </a>
+        </div> */}
       </section>
     </>
   );

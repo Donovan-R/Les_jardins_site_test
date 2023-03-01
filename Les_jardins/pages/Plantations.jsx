@@ -30,15 +30,6 @@ const Plantations = () => {
     getAllPlants();
   }, []);
 
-  // getFilterPlants = async (e) => {
-  //   const { data } = await axios.get(url);
-  //   setSearch(e.target.value);
-  //   const filterPlants = data.plants.filter((plant) =>
-  //     plant.name.includes(search) ? plant : ''
-  //   );
-  //   setPlantationsTab(filterPlants);
-  // };
-
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
@@ -46,10 +37,10 @@ const Plantations = () => {
   return (
     <section className='plantsSection'>
       <div className='calendarTitle'>
-        <h2>calendrier du potager</h2>
+        <h2>Calendrier du potager</h2>
         <input
           type='text'
-          placeholder='chercher un plant'
+          placeholder='Chercher un plant'
           value={search}
           onChange={handleChange}
         />
@@ -68,9 +59,11 @@ const Plantations = () => {
         </span>
       </Link>
 
-      <a href='#' className='goUp'>
-        <FaRegPaperPlane />
-      </a>
+      <div className='goUp'>
+        <a href='#'>
+          <FaRegPaperPlane />
+        </a>
+      </div>
     </section>
   );
 };

@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaEdit } from 'react-icons/fa';
 import Alert from '../components/Alert';
+import { useNavigate } from 'react-router-dom';
 
 const Account = ({ alert, showAlert, token }) => {
+  const [warning, setWarning] = useState(false);
   const [originalPassword, setOriginalPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [userInfos, setUserInfos] = useState({
@@ -15,6 +17,8 @@ const Account = ({ alert, showAlert, token }) => {
   });
   const [loading, setLoading] = useState(true);
   const url = 'http://localhost:5000/api/v1/account/';
+
+  const navigate = useNavigate();
 
   const getUserAccount = async () => {
     try {
@@ -43,6 +47,23 @@ const Account = ({ alert, showAlert, token }) => {
   useEffect(() => {
     getUserAccount();
   }, [token]);
+
+  const deleteAccount = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.delete(url, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      showAlert('votre compte a été supprimé', 'danger', true);
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      navigate('/');
+    } catch (error) {
+      showAlert(error.response.data.msg, 'danger', true);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -191,6 +212,20 @@ const Account = ({ alert, showAlert, token }) => {
               <button>changer de mot de passe</button>
             </fieldset>
           </form>
+          <button
+            onClick={deleteAccount}
+            className='deleteAccountBtn'
+            onMouseEnter={() => setWarning(true)}
+            onMouseLeave={() => setWarning(false)}
+          >
+            supprimer mon compte
+            {warning && (
+              <span className='warningAccount'>
+                attention en cliquant sur supprimer, vous supprimerez
+                définitivement vos données
+              </span>
+            )}
+          </button>
         </section>
       </>
     );

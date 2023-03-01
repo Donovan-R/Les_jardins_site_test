@@ -20,6 +20,7 @@ const Navbar = ({ token, setToken, user }) => {
 
   const disconnectUser = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setToken('');
   };
 
@@ -33,7 +34,11 @@ const Navbar = ({ token, setToken, user }) => {
               <FaBars />
             </button>
           </div>
-          <div className='links-container' ref={contRef}>
+          <div
+            className='links-container'
+            ref={contRef}
+            onMouseLeave={() => setIsOpen(false)}
+          >
             {!token ? (
               <ul className='links' ref={linksRef}>
                 {linksPublic.map((link) => {
@@ -55,7 +60,7 @@ const Navbar = ({ token, setToken, user }) => {
                     </li>
                   );
                 })}
-                {user.role == 2 && (
+                {user.role === 2 && (
                   <li>
                     <Link to='/dashboard'>Espace admin</Link>
                   </li>

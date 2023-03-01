@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Alert from './Alert';
 
-const Form = ({ alert, showAlert, setToken }) => {
+const Form = ({ alert, showAlert }) => {
   const [user, setUser] = useState({
     lastname: '',
     firstname: '',
@@ -24,7 +24,6 @@ const Form = ({ alert, showAlert, setToken }) => {
   };
 
   const handleSelectedFile = (e) => {
-    console.log(e.target.files[0]);
     setSelectedFile(e.target.files[0]);
   };
 
@@ -45,20 +44,12 @@ const Form = ({ alert, showAlert, setToken }) => {
     formData.append('agree', user.agree);
 
     try {
-      const { data } = await axios.post(
-        'http://localhost:5000/api/v1/auth/register',
-        formData
-      );
-      localStorage.setItem('token', data.token);
-      setToken(data.token);
-
-      navigate('/todo');
+      await axios.post('http://localhost:5000/api/v1/auth/register', formData);
+      navigate('/login');
     } catch (error) {
       showAlert(error.response.data.msg, 'danger', true);
     }
   };
-
-  // const [loaded, setLoaded] = useState(0);
 
   return (
     <>
@@ -126,7 +117,7 @@ const Form = ({ alert, showAlert, setToken }) => {
           </div>
           <div className='formRow justificatifRow'>
             <label htmlFor='justificatif'>
-              joindre un justificatif de domicile
+              joindre un justificatif de domicile (PDF ou image)
             </label>
             <input
               className='justificatifInput'
