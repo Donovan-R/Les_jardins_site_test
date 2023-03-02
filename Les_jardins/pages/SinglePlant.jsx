@@ -10,7 +10,7 @@ const SinglePlant = () => {
   const [plantsFriends, setPlantsFriends] = useState([]);
   const [plantsEnnemies, setPlantsEnnemies] = useState([]);
   const { id } = useParams();
-  const url = 'http://localhost:5000/api/v1/plants/';
+  const url = `${import.meta.env.VITE_URL}/plants/`;
 
   const getSinglePlant = async () => {
     try {

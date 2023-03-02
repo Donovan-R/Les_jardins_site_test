@@ -22,15 +22,16 @@ const Ressources = () => {
           </a>
         </li>
       </ul>
-      <Link to='/'>
+      {/* <Link to='/'>
         <span className='backHome'>
           <GiBirdHouse />
         </span>
       </Link>
-
-      <a href='#' className='goUp'>
-        <FaRegPaperPlane />
-      </a>
+      <div className='goUp'>
+        <a href='#'>
+          <FaRegPaperPlane />
+        </a>
+      </div> */}
     </section>
   );
 };

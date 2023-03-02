@@ -12,7 +12,7 @@ const Tasks = ({ alert, showAlert, user }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
   const token = localStorage.getItem('token');
-  const url = 'http://localhost:5000/api/v1/tasks/';
+  const url = `${import.meta.env.VITE_URL}/tasks/`;
   const inputRef = useRef(null);
 
   //* focus

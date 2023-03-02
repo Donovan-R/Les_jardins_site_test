@@ -14,6 +14,8 @@ import Account from '../pages/Account';
 import Dashboard from '../pages/Dashboard';
 import Ressources from '../pages/Ressources';
 import Error from '../pages/Error';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const getToken = () => {
   return localStorage.getItem('token') ? localStorage.getItem('token') : '';
 };
@@ -38,7 +40,8 @@ const App = () => {
 
   return (
     <Router>
-      <h1>Les jardins de l'Autour</h1>
+      <h1>Autour des jardins de Chéreng</h1>
+      <ToastContainer></ToastContainer>
       <Routes>
         <Route
           path='/'

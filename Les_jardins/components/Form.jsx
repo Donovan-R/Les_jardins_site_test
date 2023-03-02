@@ -42,9 +42,8 @@ const Form = ({ alert, showAlert }) => {
     formData.append('password', user.password);
     formData.append('comments', user.comments);
     formData.append('agree', user.agree);
-
     try {
-      await axios.post('http://localhost:5000/api/v1/auth/register', formData);
+      await axios.post(`${import.meta.env.VITE_URL}/auth/register`, formData);
       navigate('/login');
     } catch (error) {
       showAlert(error.response.data.msg, 'danger', true);

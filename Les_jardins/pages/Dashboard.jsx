@@ -6,8 +6,8 @@ import { GiButterflyWarning } from 'react-icons/gi';
 import Alert from '../components/Alert';
 
 const Dashboard = ({ alert, showAlert, token, user }) => {
-  const url = 'http://localhost:5000/api/v1/dash/';
-  const urlPlants = 'http://localhost:5000/api/v1/plants/';
+  const url = `${import.meta.env.VITE_URL}/dash/`;
+  const urlPlants = `${import.meta.env.VITE_URL}/plants/`;
   const [plantationsTab, setPlantationsTab] = useState([]);
   let plantsTabDashboard = [...plantationsTab];
   const [users, setUsers] = useState([]);
@@ -21,6 +21,10 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
     name: '',
     role_id: '',
     user_id: '',
+  });
+  const [plantToEdit, setPlantToEdit] = useState({
+    name: '',
+    plantation_date_start: '',
   });
 
   let newUsers = [...users];
@@ -124,12 +128,18 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
 
   const getSinglePlantInfos = async (plant_id) => {
     try {
-      const { data } = await axios.get(`${url}${plant_id}`, {
+      const {
+        data: { plant },
+      } = await axios.get(`${url}${plant_id}`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
       });
-      console.log(data);
+      setPlantToEdit({
+        name: plant.name,
+        plantation_date_start: plant.plantation_date_start,
+      });
+      console.log(plantToEdit);
     } catch (error) {
       console.log(error.response);
       showAlert(error.response.data.msg, 'danger', true);
@@ -219,6 +229,19 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                 </div>
               );
             })}
+            {/* <form className='formEntire'>
+              <input
+                type='text'
+                value={plantToEdit.name}
+                className='formInput'
+              />
+              <input
+                type='date'
+                className='formInput'
+                defaultValue={plantToEdit.plantation_date_start}
+              />
+            </form> */}
+            <form action='' className='addPlantForm'></form>
           </div>
         </section>
       )}

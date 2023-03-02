@@ -6,7 +6,7 @@ import axios from 'axios';
 import PlantsList from '../components/PlantsList';
 
 const Plantations = () => {
-  const url = 'http://localhost:5000/api/v1/plants/';
+  const url = `${import.meta.env.VITE_URL}/plants/`;
   const [plantationsTab, setPlantationsTab] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState('');

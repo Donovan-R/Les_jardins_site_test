@@ -38,7 +38,7 @@ const Login = ({ alert, showAlert, setToken, setUser }) => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        'http://localhost:5000/api/v1/auth/login',
+        `${import.meta.env.VITE_URL}/auth/login`,
         userInput
       );
       localStorage.setItem('token', data.token);
